@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="description" content="Appointment Manager">
+    <meta charset="utf-8">
+	<title>Appointment Manager | What's Up</title>
+	{%load staticfiles%}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'pypi/css/style.css' %}">
+
+</head>
+<body>
+	<div class="header">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+				</div>
+				<div>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="{%url 'logOut'%}">Log Out</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+				<br/><br/>
+				<h1>Welcome {{users.name}}!</h1>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-3">
+					{% if messages%}
+					<ul class="messages">
+						{%for message in messages%}
+						<li>{{message}}</li>
+						{%endfor%}
+					{%endif%}
+					</ul>
+				</div>
+		</div>
+		<div class="row" name="todayAppts"> 
+            <div class="col-xs-12">
+                <table class="table">
+                    <thead>
+                        <th>Tasks</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                    </thead>
+                    <tbody>
+                    	{%for task in tasks %}
+                            {% if not task.date > today %}
+                            
+                        <tr>
+                            <td>{{task.task}}</td>
+                            <td>{{task.time|time:"g:i a"}}</td>
+                            <td>{{task.status}}</td>
+                            <td>
+                               <form action="{%url 'a_show' id=task.id%}" method="POST">
+                                {%csrf_token%}
+                                    <input type="hidden" name="task_id" value="{{task.id}}">
+                                    <fieldset>
+                                        <button class="btn btn-primary" type="submit">Edit</button>
+                                    </fieldset>                               
+                                </form>
+
+                                <form action="{%url 'a_delete' id=task.id %}" method="POST">
+                                {%csrf_token%}
+                                    <input type="hidden" name="task_id" value="{{task.id}}">
+
+                                    <fieldset>
+                                        <button class="btn btn-primary" type="submit">Delete</button>
+                                    </fieldset>                               
+                                </form>
+                            </td>
+                        </tr>  
+                            {% endif %}                            
+                        {% endfor %}         
+                    </tbody>
+                </table>
+            </div>
+        </div>
+      
+		<div class="row" name="OtherTrips"> 
+            <div class="col-xs-12">
+                <table class="table">
+                    <thead>
+                        <th>Tasks</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                    </thead>
+                    <tbody>
+                        {%for task in tasks %}
+                            {% if task.date > today %}
+                        <tr>
+                        	<td>{{task.task}}</td>
+                            <td>{{task.date|date:"F j, Y"}}</td>
+                            <td>{{task.time|time:"g:i a"}}</td>
+                        </tr>
+                            {% endif %}
+                        {% endfor %}        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="row" name="addAppt"> 
+            <div class="col-xs-4">
+             <h3>Add A Task</h3>
+             <form action="{%url 'a_new'%}" method="POST">
+                {%csrf_token%}
+                   <div class="form-group">
+                        <fieldset class="form-group">
+                            <input type="hidden" name="user" value="{{users}}">
+                            <input type="hidden" name="status" value="Pending">
+                            <label class="col-sm-3 control-label">Task</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="task" class="form-control">
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="form-group">
+                            <label class="col-sm-3 control-label">Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="date" class="form-control">
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="form-group">
+                            <label class="col-sm-3 control-label">Time</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="time" value="00:00:00" class="form-control">
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="form-group">
+                            <button class="btn btn-primary" type="submit">Add Task</button>
+                        </fieldset>
+                    </div>
+                </div>
+                </form>
+                
+            </div>
+        </div>
+	
+	</div>
+    <div class="row">
+        <div class="col-xs-5"></div>
+        <div class="footer">
+            <p>&copy; 2016 AppointmentManager Inc., a division of Traveling Ninjas Inc.</p>
+        </div>
+        
+    </div>
+</body>
+</html>

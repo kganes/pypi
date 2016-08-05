@@ -1,0 +1,71 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Appointment Manager | Update Appointment</title>
+        <meta name="description" content="Appointment Manager">
+        {% load staticfiles %}
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'pypi/css/style.css' %}">
+    </head>
+    <body>
+    <div class="header">
+        <nav class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                </div>
+                <div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{% url 'a_index' %}">Dashboard</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="active"><a href="{%url 'logOut'%}">Log Out</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-4"></div>
+                <div class="col-xs-4">
+                  <form action="{% url 'a_edit' id=task.id %}" method="POST" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Task</label>
+                        <div class="col-xs-8">
+                            <input type="text" name="task" class="form-control" value="{{task.task}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                            <label class="col-xs-4 control-label">Status</label>
+                        <div class="col-xs-8">
+                            <select name="status" class="form-control">
+                                <option> -- Set Status --</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Done"></option>
+                                <option value="Missed"></option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Date</label>
+                        <div class="col-xs-8">
+                            <input type="date" name="date" class="form-control" value="{{task.date}}">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-4 control-label">Time</label>
+                        <div class="col-xs-8">
+                            <input type="time" name="time" class="form-control" value="{{task.time}}">
+                        </div>
+                    </div>
+               
+                    <input class="btn btn-default" id="submitbutton" type="submit" value="Update">
+                
+                </div>
+            </div>
+            
+        </div>
+    </body>
+</html>

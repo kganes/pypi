@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="description" content="Appointment Manager">
+    <meta charset="utf-8">
+	<title>Appointment Manager | Edit Task</title>
+	{%load staticfiles%}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'pypi/css/style.css' %}">
+
+</head>
+<body>
+	<div class="header">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header">
+				</div>
+				<div>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="{% url 'a_index' %}">Dashboard</a></li>
+                    </ul>
+					<ul class="nav navbar-nav navbar-right">
+						<li class="active"><a href="{%url 'logOut'%}">Log Out</a></li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-6">
+				<br/><br/>
+				<h1>Edit Tasks</h1>
+			</div>
+		</div>
+		<div class="row">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-3">
+					{% if messages%}
+					<ul class="messages">
+						{%for message in messages%}
+						<li>{{message}}</li>
+						{%endfor%}
+					{%endif%}
+					</ul>
+				</div>
+		</div>
+		
+        <div class="row" name="addAppt"> 
+            <div class="col-xs-4">
+        
+             <form action="{%url 'a_edit' id=task.id%}" method="POST">
+                {%csrf_token%}
+                   <div class="form-group">
+                        <fieldset class="form-group">
+                            <input type="hidden" name="user" value="{{users}}">
+                        
+                            <label class="col-sm-3 control-label">Task Name</label>
+                            <div class="col-sm-9">
+                                <input type="text" name="task" class="form-control">
+                            </div>
+                        </fieldset>
+                    
+                           <fieldset class="form-group">
+                            <label class="col-sm-3 control-label">Date</label>
+                            <div class="col-sm-9">
+                                <select name="status" class="form-control">
+                                <option> -- Set Status --</option>
+                                <option value="Pending">Pending</option>
+                                <option value="Done">Done</option>
+                                <option value="Missed">Missed</option>
+                            </select>
+                            </div>
+                        </fieldset>
+
+                        <fieldset class="form-group">
+                            <label class="col-sm-3 control-label">Date</label>
+                            <div class="col-sm-9">
+                                <input type="date" name="date" class="form-control">
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="form-group">
+                            <label class="col-sm-3 control-label">Time</label>
+                            <div class="col-sm-9">
+                                <input type="time" name="time" value="00:00:00" class="form-control">
+                            </div>
+                        </fieldset>
+                    
+                        <fieldset class="form-group">
+                            <button class="btn btn-primary" type="submit">Save Changes</button>
+                        </fieldset>
+                    </div>
+                </div>
+                </form>
+                
+            </div>
+        </div>
+	
+	</div>
+    <div class="row">
+        <div class="col-xs-5"></div>
+        <div class="footer">
+            <p>&copy; 2016 AppointmentManager Inc., a division of Traveling Ninjas Inc.</p>
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,204 @@
+/*General Styles*/
+/**{
+	outline: 1px dotted red;
+}*/
+
+ .ui-tooltip {
+    background-color: white;
+    padding: 10px 20px;
+    color: black;
+    border-radius: 20px;
+    width: 200px;
+    box-shadow: 0 0 7px black;
+    text-align: left;
+  }
+ 
+
+ul{
+	list-style-type: none;
+	text-align: center;
+	padding-left: 0px;
+}
+
+
+nav a{
+	text-decoration:none;
+}
+
+fieldset{
+	margin-top: 15px;
+	line-height: 100%;
+}
+
+hr{
+	padding-right: 0px;
+	padding-left: 0px; 
+	margin-top: 0px;
+	margin-bottom: 0px;
+	border: 0;
+	border: 2px solid rgba(0,0,0,.5);
+	border-radius: 10px;
+}
+
+textarea{
+	resize: none;
+	width: 75%;
+	height: 40px;
+	display: block;
+	border-radius: 5px;
+	color: black;
+
+}
+	textarea.messageTextArea{
+		float: right;
+		height: 60px;
+	}
+
+table{
+	margin-left: 0px;
+}
+/*End General Styles*/
+
+/*General classes*/
+.container{
+	padding-top: 50px;
+}
+
+.container h2{
+	user-select:none;
+	margin-bottom: 0px;
+	padding: 10px;
+	display:inline-block;
+	border: 2px solid black;
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+	border-bottom-radius:0px;
+	font-size: 1.5em;
+	}
+
+div.header{
+	width: 100%;
+	padding: 0px 0px 0px 20px
+	margin-bottom: 10px;
+	border:0px;
+	vertical-align:middle;
+	line-height: 50px;
+	position: fixed;
+	top:0px;
+	z-index: 2;
+
+}
+	.header h1{
+		border:0px;
+		margin: 0px 0px 0px 50px;
+		display: inline-block;
+	}
+	.header .headerRight{
+		margin: 25px 50px 0px 0px;
+		float:right;
+		line-height: 15px;
+	}
+
+
+/*End General Classes*/
+
+/*Login/Register specific Styles(index.html)*/
+
+label {
+	font-size: 1em;
+}
+
+#registerForm{
+	display: none;
+}
+
+.loginHeader {
+	text-align: center;
+}
+.loginHeader h2{
+	border: none;
+	font-size: 30px;
+}
+
+.loginScreen{
+	height: 100%;
+}
+
+#loginSwitch{
+	display: none;
+}
+
+.centered{
+	text-align: center;
+}
+#loginBox{
+	margin: 0px 0px 20px 0px;
+	padding: 20px 20px;
+	border-radius: 5px;
+}
+
+#loginBox label{
+	width: 75px;	
+	/*font-size: .75em;*/
+}
+
+.loginRegisterForm input{
+	border-radius: 2px;
+}
+/*End of Login/Register specific Styles (index.html)*/
+
+/*bulliten_board specific Styles (bulliten_board.html)*/
+.message{
+	width: 75%;
+	padding: 15px 15px 5px 15px;
+	margin: 0px 0px 0px 0px;
+	float: left;
+	display: block;
+	border-radius: 5px;
+}
+
+.messageHead{
+	height:40px;
+	margin: 5px 0px;
+	padding-left: 25px;
+	line-height: 60px; 
+	vertical-align: middle;
+
+}
+
+
+
+/*End of bulliten_board specific Styles (bulliten_board.html)*/
+/*Special classes*/
+
+.form-group input{
+	vertical-align: top;
+}
+.date{
+	font-size: .6em;
+	vertical-align: middle;
+}
+.userInfo{
+	text-align: left;
+}
+.userInfo label{
+	width: 125px;
+}
+.noPadLeft{
+	padding-left: 0px;
+}
+.infoBox{
+	width: 100%;
+	padding: 10px; 
+	border: 2px solid #243434
+	border-top-right-radius: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+	display:inline-block;
+}
+
+.infoBox li{
+	
+	text-align: left;
+}
+/*End special classes*/

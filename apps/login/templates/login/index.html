@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="description" content="Appointment Manager">
+    <meta charset="utf-8">
+	<title>Appointment Manager | Welcome!</title>
+	{%load staticfiles%}
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="{% static 'login/css/style.css' %}">
+	<script type="text/javascript" src="{%static 'login/js/jquery-3.0.0.min.js'%}"></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
+	<script type="text/javascript">
+        $(document).ready(function() {
+            $("#registerForm").hide();
+            $(".loginRegisterSwitch").click(function(event) {
+                $(".loginRegisterSwitch, .loginRegisterForm, #messages").toggle();
+            });
+        
+            $(document).tooltip({
+                content: function(){
+                    var element = $(this);
+                    if (element.is("[title]")) {
+                        return "<div>Password must be:\n</br>"+
+                            "At least 8 characters\n</br>"+
+                            "One uppercase letter\n</br>"+
+                            "One lowercase letter\n</br>"+
+                            "One number (0-9)</div>"
+                    }
+                }
+            });	
+		});	
+	</script>
+</head>
+<body>
+	<div class="header">
+		<nav class="navbar navbar-inverse navbar-fixed-top">
+			<div class="container-fluid">
+				<div class="navbar-header"></div>
+				<div>
+					<ul class="nav navbar-nav">
+						<li class="active"><a href="{% url 'login_index' %}">Home</a></li>
+					</ul>
+					<ul class="nav navbar-nav navbar-right">
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</div>
+
+	<!-- Bootstrap container -->
+	<div class="container">
+        <div class="row loginHeader">
+            
+            <div class="col-xs-12">
+                <h2>Welcome to Appointment Manager</h2>
+            </div>
+        </div>
+	<!-- This is the only row in the login screen -->
+        <div class="row loginScreen">
+			<div class="col-xs-3"></div>
+			<div id="loginBox" class="col-xs-6">
+				{% if messages %}
+                    <ul class="list-group" id="messages">
+                    <!-- list-group-item-danger -->
+                        <li class="list-group-item">
+                        {% for message in messages %}
+                        {{ message }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+				<!-- Login form -->
+				<form action="{%url 'login'%}" method="POST" id="loginForm" class="loginRegisterForm">
+				{%csrf_token%}
+					<ul>
+						<li>
+							<fieldset class="form-group">
+								<label>Email</label>
+								<input type="email" name="email">
+							</fieldset>
+						</li>
+						<li>
+							<fieldset class="form-group">
+								<label>Password</label>
+								<input type="password" name="password">
+							</fieldset>
+						</li>
+					</ul>
+					<div class="centered"> 
+						<fieldset class="form-group">
+							<button class="btn btn-primary" type="/submit">Log In</button>
+						</fieldset>
+					</div>
+				</form>
+				<!-- Register form (hidden when initially loaded) -->
+				<form action="{%url 'register'%}" method="POST" id="registerForm" class="loginRegisterForm">
+				{%csrf_token%}
+					<ul>
+						<li>
+							<fieldset class="form-group">
+								<label>Name</label>
+								<input type="text" name="name">
+							</fieldset>
+						</li>
+						<li>
+							<fieldset class="form-group">
+								<label>Email</label>
+								<input type="email" name="email">
+							</fieldset>
+						</li>
+						<li>
+							<fieldset class="form-group">
+								<label>Password</label>
+								<input type="password" name="password">
+							</fieldset>
+						</li>
+						<li>
+							<fieldset class="form-group">
+								<label>Confirm Password</label>
+								<input type="password" name="passrepeat">
+							</fieldset>
+                            <!-- <a href="#" id="tooltip" title="">Need password help?</a> -->
+						</li>
+						<li>
+							<fieldset class="form-group">
+								<label>Date of Birth:</label>
+								<input type="date" name="dob">
+							</fieldset>
+						</li>
+					</ul>
+					<div class="centered">
+						<fieldset class="form-group">
+							<button class="btn btn-primary" type="submit">Register</button>
+						</fieldset>
+					</div>
+				</form>
+				<!-- Buttons toggle login/registration -->
+				<div class="centered">
+					<button class="loginRegisterSwitch btn btn-default" id="loginSwitch">Already have an account? Login</button>
+					<button class="loginRegisterSwitch btn btn-default" id="registerSwitch">Don't have an account? Register now</button>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="row">
+        <div class="col-xs-5"></div>
+        <div class="footer">
+            <p>&copy; 2016 AppointmentManager Inc., a division of Traveling Ninjas Inc.</p>
+        </div>
+        
+    </div>
+	
+</body>
+</html>
